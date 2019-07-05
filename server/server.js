@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const { PORT } = require('../config.js');
+const { PORT, HOST } = require('../config.js');
 const app = express();
 
 const port = process.env.PORT || 3000;
+const host = process.env.HOST || '0.0.0.0';
 app.use(express.static('dist'));
 app.use(
   bodyParser.json({
@@ -12,6 +13,6 @@ app.use(
   })
 );
 
-app.listen(port, () => {
-  console.log(`Express server is listening at ${port}`);
+app.listen(port, host, () => {
+  console.log(`Running on http://${host}:${port}`);
 });
