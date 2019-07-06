@@ -9,7 +9,8 @@ class App extends React.Component {
   }
 
   render() {
-    return <div class="container">{this.state.text}</div>;
+    const { text } = this.state;
+    return <div className="container btn-primary">{text}</div>;
   }
 }
 
