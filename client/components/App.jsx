@@ -9,7 +9,7 @@ class App extends React.Component {
   }
 
   render() {
-    return <div class='container'>{this.state.text}</div>;
+    return <div class="container">{this.state.text}</div>;
   }
 }
 
