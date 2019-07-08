@@ -1,1 +1,39 @@
-{"reviewerID": "A1JZFGZEZVWQPY", "asin": "B00002N674", "reviewerName": "Carter H \"1amazonreviewer@gmail . com\"", "helpful": [4, 4], "reviewText": "Good USA company that stands behind their products. I have had to warranty two hoses and they send replacements right out to you. I had one burst after awhile, you could see it buldge for weeks before it went so no suprises. The other one was winter related as I am bad and leave them out most of the time. Highly reccomend. Note the hundred footer is heavy and like wresting an anaconda when its time to put away, but it does have a far reach.", "overall": 4.0, "summary": "Great Hoses", "unixReviewTime": 1308614400, "reviewTime": "06 21, 2011"}
+const { MongoClient } = require('mongodb');
+// const assert = require('assert');
+const { MONGO_USER, MONGO_PASS } = require('../config');
+
+const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@reviews-zpe0q.mongodb.net/test?retryWrites=true&w=majority`;
+const options = {
+  useNewUrlParser: true
+};
+
+const dbName = 'Reviews';
+const collectionName = 'Reviews';
+
+function getReviews() {
+  return MongoClient.connect(uri, options)
+    .then(connection => {
+      return connection
+        .db(dbName)
+        .collection(collectionName)
+        .findOne({ overall: { $lt: 2 } });
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
+// client.connect(err => {
+//   assert.equal(null, err);
+//   // const collection = client.db(dbName).collection(collectionName);
+
+//   console.log('Connected Successfuly to', dbName);
+//   client.close();
+// });
+
+module.exports = {
+  getReviews
+};
