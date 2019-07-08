@@ -1,7 +1,9 @@
-dist/
 node_modules/
 package-lock.json
 .env
+.prettierrc.json
+.eslintrc.json
+data
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

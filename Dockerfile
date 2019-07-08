@@ -14,7 +14,7 @@ RUN npm install --production
 COPY . .
 
 ENV NODE_ENV=production
-ENV PORT=5000
+ENV PORT=3002
 
-EXPOSE 5000
+EXPOSE 3002
 CMD [ "npm", "run", "start" ]
