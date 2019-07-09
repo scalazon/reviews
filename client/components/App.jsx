@@ -5,12 +5,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: ''
+      reviews: []
     };
   }
 
   componentDidMount() {
-    axios.get('/reviews').then(response => {
+    // TODO: Make the ASIN dynamic
+    axios.get('/reviews/B00002N8K3').then(response => {
       console.log(
         'Recieved the following data from GET to /reviews:',
         response.data
@@ -25,11 +26,21 @@ class App extends React.Component {
   render() {
     const { reviews } = this.state;
 
+    if (reviews.length === 0) {
+      return (
+        <div className="container">
+          <div className="row h2">Reviews</div>
+        </div>
+      );
+    }
+
+    const firstReview = reviews[0];
+
     return (
       <div className="container">
         <div className="row h2">Reviews</div>
-        <div className="row h4">{reviews.summary}</div>
-        <div className="row">{reviews.reviewText}</div>
+        <div className="row h4">{firstReview.summary}</div>
+        <div className="row">{firstReview.reviewText}</div>
       </div>
     );
   }

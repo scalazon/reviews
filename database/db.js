@@ -1,5 +1,4 @@
 const { MongoClient } = require('mongodb');
-// const assert = require('assert');
 const { MONGO_USER, MONGO_PASS } = require('../config');
 
 const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@reviews-zpe0q.mongodb.net/test?retryWrites=true&w=majority`;
@@ -10,13 +9,14 @@ const options = {
 const dbName = 'Reviews';
 const collectionName = 'Reviews';
 
-function getReviews() {
+function getReviews(asin) {
   return MongoClient.connect(uri, options)
     .then(connection => {
       return connection
         .db(dbName)
         .collection(collectionName)
-        .findOne({ overall: { $lt: 2 } });
+        .find({ asin: { $eq: asin } })
+        .toArray();
     })
     .then(result => {
       return result;
@@ -25,14 +25,6 @@ function getReviews() {
       console.error(err);
     });
 }
-
-// client.connect(err => {
-//   assert.equal(null, err);
-//   // const collection = client.db(dbName).collection(collectionName);
-
-//   console.log('Connected Successfuly to', dbName);
-//   client.close();
-// });
 
 module.exports = {
   getReviews

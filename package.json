@@ -10,6 +10,7 @@
     "watch": "webpack --watch",
     "dev-server": "nodemon -r dotenv/config server/server.js",
     "dev-client": "webpack-dev-server  --open --color ",
+    "docker-local": "docker run --env-file='.env' -p 3002:3002 bleafman/famazon-reviews",
     "build": "webpack",
     "start": "node server/server.js"
   },
@@ -20,6 +21,7 @@
     "express": "^4.16.4",
     "html-webpack-plugin": "^3.2.0",
     "mongodb": "^3.2.7",
+    "morgan": "^1.9.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-loadable": "^5.4.0",

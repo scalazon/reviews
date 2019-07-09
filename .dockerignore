@@ -1,5 +1,6 @@
 node_modules
 data
+tests
 npm-debug.log
 .prettierrc.json
 .eslintrc.json
