@@ -20,7 +20,6 @@ function getReviews(asin) {
         .toArray();
     })
     .then(result => {
-      console.log(`Results for ${asin}:`, result);
       return result;
     })
     .catch(err => {

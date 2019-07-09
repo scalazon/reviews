@@ -11,6 +11,7 @@ app.use(
     strict: false
   })
 );
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/reviews', morgan('tiny'));
 
