@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "mocha -r dotenv/config ./tests",
     "watch": "webpack --watch",
     "dev-server": "nodemon -r dotenv/config server/server.js",
     "dev-client": "webpack-dev-server  --open --color ",
@@ -26,22 +26,25 @@
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "css-loader": "^3.0.0",
     "dotenv": "^8.0.0",
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jest": "^22.7.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
     "html-loader": "^0.5.5",
-    "jest": "^24.8.0",
+    "mocha": "^6.1.4",
     "prettier": "1.18.2",
     "style-loader": "^0.23.1",
     "supertest": "^4.0.2",
@@ -52,7 +55,12 @@
   "babel": {
     "presets": [
       [
-        "@babel/preset-env"
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
       ],
       [
         "@babel/react"

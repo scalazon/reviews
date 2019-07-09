@@ -11,7 +11,7 @@ module.exports = {
     proxy: [
       {
         context: () => true,
-        target: 'http://localhost:3000',
+        target: 'http://localhost:3002',
         secure: false
       }
     ]

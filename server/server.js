@@ -1,4 +1,4 @@
-const app = require('./routes');
+const app = require('./app.js');
 
 const { PORT, HOST } = require('../config.js');
 
