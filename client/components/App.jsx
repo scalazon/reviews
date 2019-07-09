@@ -5,12 +5,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: ''
+      reviews: []
     };
   }
 
   componentDidMount() {
-    axios.get('/reviews').then(response => {
+    // TODO: Make the ASIN dynamic
+    axios.get('/reviews/B00002N8K3').then(response => {
       console.log(
         'Recieved the following data from GET to /reviews:',
         response.data

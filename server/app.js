@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const path = require('path');
+const morgan = require('morgan');
 const { getReviews } = require('../database/db');
 
 const app = express();
@@ -12,10 +12,26 @@ app.use(
   })
 );
 
+app.use('/reviews', morgan('tiny'));
+
+app.get('/reviews/:asin(\\w+)', (req, res) => {
+  const { asin } = req.params;
+
+  if (asin) {
+    getReviews(asin)
+      .then(result => {
+        res.send(result);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  } else {
+    res.send();
+  }
+});
+
 app.get('/reviews', (req, res) => {
-  getReviews().then(result => {
-    res.send(result);
-  });
+  res.send();
 });
 
 module.exports = app;

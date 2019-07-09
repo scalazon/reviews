@@ -10,29 +10,23 @@ const options = {
 const dbName = 'Reviews';
 const collectionName = 'Reviews';
 
-function getReviews() {
+function getReviews(asin) {
   return MongoClient.connect(uri, options)
     .then(connection => {
       return connection
         .db(dbName)
         .collection(collectionName)
-        .findOne({ overall: { $lt: 2 } });
+        .find({ asin: { $eq: asin } })
+        .toArray();
     })
     .then(result => {
+      console.log(`Results for ${asin}:`, result);
       return result;
     })
     .catch(err => {
       console.error(err);
     });
 }
-
-// client.connect(err => {
-//   assert.equal(null, err);
-//   // const collection = client.db(dbName).collection(collectionName);
-
-//   console.log('Connected Successfuly to', dbName);
-//   client.close();
-// });
 
 module.exports = {
   getReviews
