@@ -10,6 +10,7 @@
     "watch": "webpack --watch",
     "dev-server": "nodemon -r dotenv/config server/server.js",
     "dev-client": "webpack-dev-server  --open --color ",
+    "docker-local": "docker run --env-file='.env' -p 3002:3002 bleafman/famazon-reviews",
     "build": "webpack",
     "start": "node server/server.js"
   },
