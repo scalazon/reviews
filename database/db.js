@@ -1,5 +1,4 @@
 const { MongoClient } = require('mongodb');
-// const assert = require('assert');
 const { MONGO_USER, MONGO_PASS } = require('../config');
 
 const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@reviews-zpe0q.mongodb.net/test?retryWrites=true&w=majority`;

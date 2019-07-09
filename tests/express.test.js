@@ -50,6 +50,10 @@ describe('Express routes -->', () => {
           // expect(response.body).to.have.property('summary');
           expect(response.body).to.be.an('array');
           expect(response.body[0].asin).to.equal(ASIN);
+          // for (let i = 0; i < response.body.length; i += 1) {
+          //   expect(response.body[i]).to.have.property('asin');
+          //   expect(response.body[i].asin).to.equal(ASIN);
+          // }
         });
     });
 
