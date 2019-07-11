@@ -48,6 +48,7 @@ function reviewsGetData(asin) {
         }
       })
       .catch(err => {
+        dispatch(reviewsIsLoading(false));
         dispatch(reviewsHasError(true));
         throw new Error(err);
       });
