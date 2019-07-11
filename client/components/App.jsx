@@ -1,32 +1,24 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { reviewsGetData } from '../actions/reviews';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      reviews: []
-    };
-  }
-
   componentDidMount() {
-    // TODO: Make the ASIN dynamic
-    axios.get('/reviews/B00002N8K3').then(response => {
-      console.log(
-        'Recieved the following data from GET to /reviews:',
-        response.data
-      );
+    const { getReviews } = this.props;
 
-      this.setState({
-        reviews: response.data
-      });
-    });
+    getReviews('B00002N8K3');
   }
 
   render() {
-    const { reviews } = this.state;
+    const {
+      reviews,
+      reviewsHasError,
+      reviewsIsLoading,
+      reviewsNotFound
+    } = this.props;
 
-    if (reviews.length === 0) {
+    if (reviewsNotFound) {
       return (
         <div className="container">
           <div className="row h2">Reviews</div>
@@ -34,16 +26,58 @@ class App extends React.Component {
       );
     }
 
-    const firstReview = reviews[0];
+    if (reviewsIsLoading) {
+      return (
+        <div className="container">
+          <div className="row h2">Reviews</div>
+          <div className="row h4">Loading...</div>
+        </div>
+      );
+    }
+
+    if (reviewsHasError) {
+      return (
+        <div className="container">
+          <div className="row h2">Reviews</div>
+          <div className="row h4">There was an Error...</div>
+        </div>
+      );
+    }
+
+    // TODO: Refactor the conditional to be correct for a review list
+    if (reviews.length > 0) {
+      const firstReview = reviews[0];
+      return (
+        <div className="container">
+          <div className="row h2">Reviews</div>
+          <div className="row h4">{firstReview.summary}</div>
+          <div className="row">{firstReview.reviewText}</div>
+        </div>
+      );
+    }
 
     return (
       <div className="container">
         <div className="row h2">Reviews</div>
-        <div className="row h4">{firstReview.summary}</div>
-        <div className="row">{firstReview.reviewText}</div>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    reviews: state.reviews,
+    reviewsHasError: state.reviewsHasError,
+    reviewsIsLoading: state.reviewsIsLoading,
+    reviewsNotFound: state.reviewsNotFound
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return { getReviews: asin => dispatch(reviewsGetData(asin)) };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
