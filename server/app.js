@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 const { getReviews } = require('../database/db');
 
 const app = express();
@@ -14,7 +15,7 @@ app.use(
 
 app.use('/reviews', morgan('tiny'));
 
-app.get('/reviews/:asin(\\w+)', (req, res) => {
+app.get('/reviews/:asin(\\w+)', cors(), (req, res) => {
   const { asin } = req.params;
 
   if (asin) {
