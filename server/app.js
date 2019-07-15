@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 const { getReviews } = require('../database/db');
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.static('dist'));
 app.use(

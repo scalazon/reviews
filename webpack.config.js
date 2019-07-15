@@ -25,11 +25,11 @@ module.exports = {
   },
 
   entry: {
-    index: './client/index.js' //entry point
+    index: './client/index.jsx' //entry point
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'reviews_bundle.js',
     chunkFilename: '[id][hash].js',
     publicPath: '/'
   },

@@ -21,6 +21,7 @@ function reviewsIsLoading(bool) {
   };
 }
 
+// eslint-disable-next-line no-shadow
 function reviews(reviews) {
   return {
     type: 'REVIEWS_GET_DATA_SUCCESS',
@@ -31,9 +32,8 @@ function reviews(reviews) {
 function reviewsGetData(asin) {
   return dispatch => {
     dispatch(reviewsIsLoading(true));
-
     axios
-      .get(`/reviews/${asin}`)
+      .get(`http://reviews-dev.us-west-2.elasticbeanstalk.com/reviews/${asin}`)
       .then(response => {
         console.log(
           'Recieved the following data from GET to /reviews:',
