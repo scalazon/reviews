@@ -49,7 +49,7 @@ class App extends React.Component {
     if (reviews.length > 0) {
       const firstReview = reviews[0];
       return (
-        <div className="container amazon-yellow-bg">
+        <div className="container">
           <div className="row h2">Reviews</div>
           <div className="row h4">{firstReview.summary}</div>
           <div className="row">{firstReview.reviewText}</div>
