@@ -1,6 +1,13 @@
-// @font-face {
-//   font-family: 'AmazonEmber';
-//   src: url('../fonts/AmazonEmber_Rg.ttf') format('truetype');
-// }
+@font-face {
+  font-family: 'AmazonEmber';
+  src: url('../fonts/AmazonEmber_Rg.ttf') format('truetype');
+  font-style: normal;
+}
+
+$font-stack: AmazonEmber, sans-serif;
+//Global Font
+#reviews {
+  font: 100% $font-stack;
+}
 
 $amazon-yellow: #ff9900;
