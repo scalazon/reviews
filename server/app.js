@@ -6,8 +6,6 @@ const { getReviews } = require('../database/db');
 
 const app = express();
 
-app.use(cors());
-
 app.use(express.static('dist'));
 app.use(
   bodyParser.json({
@@ -17,7 +15,7 @@ app.use(
 
 app.use('/reviews', morgan('tiny'));
 
-app.get('/reviews/:asin(\\w+)', (req, res) => {
+app.get('/reviews/:asin(\\w+)', cors(), (req, res) => {
   const { asin } = req.params;
 
   if (asin) {
