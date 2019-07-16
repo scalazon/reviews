@@ -6,27 +6,27 @@ const options = {
   useNewUrlParser: true
 };
 
-let mongodb;
+const databases = {};
 
-function connect(callback) {
-  MongoClient.connect(uri, options, (err, db) => {
-    mongodb = db;
-    callback();
-  });
-}
-function get() {
-  return mongodb;
+function connect(url, database) {
+  return MongoClient.connect(url, options).then(client => client.db(database));
 }
 
-function close() {
-  mongodb.close();
+async function initializeDatabases() {
+  // const databases = await Promise.all([connect(uri)]);
+  const reviews = await connect(
+    uri,
+    'Reviews'
+  );
+  databases.reviews = reviews;
 }
 
-module.exports = {
-  connect,
-  get,
-  close
-};
+function getReviewsDatabase() {
+  return databases.reviews;
+}
+
+module.exports = { initializeDatabases, getReviewsDatabase };
+
 // function connect(url, dbName) {
 //   return MongoClient.connect(url, options)
 //     .then(client => client.db(dbName))
