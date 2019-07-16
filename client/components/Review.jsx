@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import User from './User.jsx';
 import ReviewSummary from './ReviewSummary.jsx';
+import ReviewText from './ReviewText.jsx';
 
 function Review(props) {
   const { review } = props;
@@ -9,13 +10,18 @@ function Review(props) {
   return (
     <div>
       <div className="row">
-        <div className="col-12">
+        <div className="col">
           <User reviewerName={review.reviewerName} />
         </div>
       </div>
       <div className="row">
         <div className="col">
-          <ReviewSummary />
+          <ReviewSummary summary={review.summary} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <ReviewText reviewText={review.reviewText} />
         </div>
       </div>
     </div>
@@ -25,7 +31,8 @@ function Review(props) {
 Review.propTypes = {
   review: PropTypes.shape({
     summary: PropTypes.string.isRequired,
-    reviewerName: PropTypes.string.isRequired
+    reviewerName: PropTypes.string.isRequired,
+    reviewText: PropTypes.string.isRequired
   }).isRequired
 };
 
