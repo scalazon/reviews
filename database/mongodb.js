@@ -26,27 +26,3 @@ function getReviewsDatabase() {
 }
 
 module.exports = { initializeDatabases, getReviewsDatabase };
-
-// function connect(url, dbName) {
-//   return MongoClient.connect(url, options)
-//     .then(client => client.db(dbName))
-//     .catch(err => {
-//       console.error('Failed to make all database connections!');
-//       console.error(err);
-//       // Uncomment line below for server to not run without this connection
-//       // process.exit(1);
-//     });
-// }
-
-// async function initializeDatabases() {
-//   const databases = await Promise.all([
-//     connect(
-//       uri,
-//       `Reviews`
-//     )
-//   ]);
-
-//   return {
-//     reviewsConnection: databases[0]
-//   };
-// }

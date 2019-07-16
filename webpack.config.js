@@ -7,7 +7,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000,
-    historyApiFallback: true, //navigation
+    historyApiFallback: true, // navigation
     proxy: [
       {
         context: () => true,
@@ -17,7 +17,7 @@ module.exports = {
     ]
   },
 
-  devtool: 'cheap-eval-source-map', //fast build, super fast rebuilds
+  devtool: 'cheap-eval-source-map', // fast build, super fast rebuilds
   performance: {
     maxEntrypointSize: 10000,
     maxAssetSize: 10000,
@@ -52,6 +52,18 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(sass|scss)$/,
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader' // compiles Sass to CSS, using Node Sass by default
+        ]
+      },
+      {
         test: /\.(png|jpg|gif|jpeg|ttf)$/,
         use: [
           {
@@ -67,7 +79,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "Brandon's React Starter",
-      template: __dirname + '/client/index.html', //create index.html with js script
+      template: __dirname + '/client/index.html', // create index.html with js script
       inject: 'body',
       filename: 'index.html'
     })
