@@ -79,11 +79,5 @@ describe('Express routes -->', () => {
           expect(response.body).to.be.an('object').that.is.empty;
         });
     });
-
-    xit('When a POST request is recieved, expect a 201 status', () => {
-      return request(endpoint)
-        .post('/reviews')
-        .expect(201);
-    });
   });
 });
