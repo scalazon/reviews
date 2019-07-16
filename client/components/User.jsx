@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line no-unused-vars
+// needed for bundle, requiring it here
 import userIcon from '../images/userIcon.jpeg';
 
 function User(props) {
@@ -10,10 +12,7 @@ function User(props) {
       <div className="col-2">
         <img
           className=""
-          src={
-            userIcon ||
-            `http://reviews-dev.us-west-2.elasticbeanstalk.com/client/images/userIcon.jpeg`
-          }
+          src="http://reviews-dev.us-west-2.elasticbeanstalk.com/client/images/userIcon.jpeg"
           alt="userIcon"
         />
       </div>
