@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-const { getReviews } = require('../database/db');
+const { getReviews } = require('../database/dbs');
 
 const app = express();
 
