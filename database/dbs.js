@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 const { MONGO_USER, MONGO_PASS } = require('../config');
-const { reviewsConnection } = require('./index');
+const { get } = require('./mongodb.js');
 
 // const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@reviews-zpe0q.mongodb.net/test?retryWrites=true&w=majority`;
 // const options = {
@@ -10,9 +10,12 @@ const { reviewsConnection } = require('./index');
 // const dbName = 'Reviews';
 
 const collectionName = 'Reviews';
+const reviews = get();
+
+console.log(reviews);
 
 function getReviews(asin) {
-  return reviewsConnection
+  return reviews
     .collection(collectionName)
     .find({ asin: { $eq: asin } })
     .toArray()
