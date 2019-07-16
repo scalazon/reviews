@@ -7,9 +7,9 @@
   src: url('../fonts/AmazonEmber_Bd.ttf') format('truetype');
 }
 
-$ember-font: AmazonEmber, sans-serif;
+$ember-font: AmazonEmber, EmberRg, sans-serif;
 
-$ember-bold: AmazonEmberBold, sans-serif;
+$ember-bold: AmazonEmberBold, EmberBd, sans-serif;
 
 $amazon-yellow: #ff9900;
 $amazon-grey: #e8e8e8;

@@ -4,7 +4,8 @@ const { MONGO_USER, MONGO_PASS } = require('../config');
 
 const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@reviews-zpe0q.mongodb.net/test?retryWrites=true&w=majority`;
 const options = {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  poolSize: 666
 };
 
 const dbName = 'Reviews';
