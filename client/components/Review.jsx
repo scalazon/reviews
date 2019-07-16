@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import User from './User.jsx';
 import ReviewSummary from './ReviewSummary.jsx';
 import ReviewText from './ReviewText.jsx';
+import ReviewDate from './ReviewDate.jsx';
 
 function Review(props) {
   const { review } = props;
@@ -12,6 +13,11 @@ function Review(props) {
       <div className="row">
         <div className="col">
           <User reviewerName={review.reviewerName} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <ReviewDate unixReviewTime={review.unixReviewTime} />
         </div>
       </div>
       <div className="row">
@@ -32,7 +38,8 @@ Review.propTypes = {
   review: PropTypes.shape({
     summary: PropTypes.string.isRequired,
     reviewerName: PropTypes.string.isRequired,
-    reviewText: PropTypes.string.isRequired
+    reviewText: PropTypes.string.isRequired,
+    unixReviewTime: PropTypes.number.isRequired
   }).isRequired
 };
 

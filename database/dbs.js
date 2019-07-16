@@ -1,5 +1,3 @@
-const { MongoClient } = require('mongodb');
-const { MONGO_USER, MONGO_PASS } = require('../config');
 const { reviewsConnection } = require('./index');
 
 // const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@reviews-zpe0q.mongodb.net/test?retryWrites=true&w=majority`;

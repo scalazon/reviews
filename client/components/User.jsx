@@ -7,7 +7,7 @@ function User(props) {
 
   return (
     <div className="row">
-      <div className="col-1">
+      <div className="col-2">
         <img
           className=""
           src={
@@ -17,7 +17,7 @@ function User(props) {
           alt="userIcon"
         />
       </div>
-      <div className="col-11">{reviewerName}</div>
+      <div className="col-10">{reviewerName}</div>
     </div>
   );
 }
