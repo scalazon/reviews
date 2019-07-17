@@ -185,5 +185,6 @@ module.exports = {
   findReviewsforInvalidASIN,
   findAndUpdateReviewsforInvalidASIN,
   updateOneASIN,
-  bulkUpdateASINs
+  bulkUpdateASINs,
+  validASINs
 };
