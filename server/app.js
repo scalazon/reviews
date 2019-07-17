@@ -3,6 +3,14 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const { getReviews } = require('../database/reviews');
+const {
+  findReviewsforInvalidASIN,
+  currentASINs,
+  findAndUpdateReviewsforInvalidASIN,
+  unassignedValidASINs,
+  updateOneASIN,
+  bulkUpdateASINs
+} = require('../database/asins');
 
 const app = express();
 
@@ -34,5 +42,51 @@ app.get('/reviews/:asin(\\w+)', cors(), (req, res) => {
 app.get('/reviews', (req, res) => {
   res.send();
 });
+
+/* ASIN ROUTES */
+
+// app.get('/asins', (req, res) => {
+//   currentASINs()
+//     .then(result => {
+//       res.send(result);
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       res.send();
+//     });
+// });
+
+// app.get('/asins/updateAll', (req, res) => {
+//   bulkUpdateASINs()
+//     .then(result => {
+//       res.send(result);
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       res.send();
+//     });
+// });
+
+// app.get('/asins/updateOne', (req, res) => {
+//   findAndUpdateReviewsforInvalidASIN()
+//     .then(result => {
+//       res.send(result);
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       res.send();
+//     });
+// });
+
+// app.get('/asins/oneInvalid', (req, res) => {
+//   findReviewsforInvalidASIN()
+//     .then(result => {
+//       res.send(result);
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       res.send();
+//     });
+// });
 
 module.exports = app;
