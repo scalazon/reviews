@@ -9,7 +9,7 @@ class App extends React.Component {
   componentDidMount() {
     const { getReviews } = this.props;
 
-    getReviews(`B00002N8K3`);
+    getReviews(`B077L6KSGM`);
   }
 
   render() {

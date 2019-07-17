@@ -4,13 +4,10 @@ const morgan = require('morgan');
 const cors = require('cors');
 const { getReviews } = require('../database/reviews');
 const {
-  findReviewsforInvalidASIN,
-  currentASINs,
-  findAndUpdateReviewsforInvalidASIN,
-  unassignedValidASINs,
-  updateOneASIN,
-  bulkUpdateASINs
-} = require('../database/asins');
+  updateSummaries,
+  getSummaries,
+  getSummary
+} = require('../database/summaries');
 
 const app = express();
 
@@ -41,6 +38,44 @@ app.get('/reviews/:asin(\\w+)', cors(), (req, res) => {
 
 app.get('/reviews', (req, res) => {
   res.send();
+});
+
+app.get('/summaries/updateAll', (req, res) => {
+  updateSummaries()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.error(err);
+      res.send();
+    });
+});
+
+app.get('/summaries/:asin(\\w+)', cors(), (req, res) => {
+  const { asin } = req.params;
+
+  if (asin) {
+    getSummary(asin)
+      .then(result => {
+        res.send(result);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  } else {
+    res.send();
+  }
+});
+
+app.get('/summaries', (req, res) => {
+  getSummaries()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.error(err);
+      res.send();
+    });
 });
 
 /* ASIN ROUTES */
