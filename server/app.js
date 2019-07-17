@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const { getReviews } = require('../database/reviews');
+const { currentASINs, updateOneASIN } = require('../database/summaries');
 
 const app = express();
 
@@ -33,6 +34,28 @@ app.get('/reviews/:asin(\\w+)', cors(), (req, res) => {
 
 app.get('/reviews', (req, res) => {
   res.send();
+});
+
+app.get('/summaries', (req, res) => {
+  currentASINs()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.error(err);
+      res.send();
+    });
+});
+
+app.get('/summaries/updateOne', (req, res) => {
+  updateOneASIN()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.error(err);
+      res.send();
+    });
 });
 
 module.exports = app;
