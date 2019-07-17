@@ -103,21 +103,61 @@ const validASINs = [
   'B07G37ZJBS'
 ];
 
-let ASINcounter = Math.floor(Math.random() * (validASINs.length - 0 + 1) + 0);
-
 function currentASINs() {
   return getReviewsDatabase()
     .collection(collectionName)
     .distinct('asin');
 }
 
-function currentValidASINs() {
+function findReviewsforInvalidASIN() {
+  return getReviewsDatabase()
+    .collection(collectionName)
+    .findOne({ asin: { $nin: validASINs } })
+    .then(review => {
+      return getReviewsDatabase()
+        .collection(collectionName)
+        .find({ asin: { $eq: review.asin } })
+        .toArray();
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
+function findAndUpdateReviewsforInvalidASIN(newASIN) {
+  return getReviewsDatabase()
+    .collection(collectionName)
+    .findOne({ asin: { $nin: validASINs } })
+    .then(review => {
+      return getReviewsDatabase()
+        .collection(collectionName)
+        .updateMany(
+          { asin: { $eq: review.asin } },
+          { $set: { asin: newASIN } }
+        );
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
+function unassignedValidASINs() {
   return getReviewsDatabase()
     .collection(collectionName)
     .distinct('asin')
     .then(array => {
       return validASINs.filter(value => !array.includes(value));
     });
+}
+
+//Doesn't actually bulk update, just updates one. Was worried about database explosion.
+async function bulkUpdateASINs() {
+  const remainingASINs = await unassignedValidASINs();
+
+  if (remainingASINs.length > 0) {
+    await findAndUpdateReviewsforInvalidASIN(remainingASINs[0]);
+  }
+  return remainingASINs.length.toString();
 }
 
 function currentInvalidASINs() {
@@ -129,8 +169,6 @@ function currentInvalidASINs() {
     });
 }
 
-async function bulkUpdateASINs() {}
-
 function updateOneASIN() {
   ASINcounter = Math.floor(Math.random() * (validASINs.length - 0 + 1) + 0);
   return getReviewsDatabase()
@@ -141,4 +179,11 @@ function updateOneASIN() {
     );
 }
 
-module.exports = { currentASINs, updateOneASIN };
+module.exports = {
+  currentASINs,
+  unassignedValidASINs,
+  findReviewsforInvalidASIN,
+  findAndUpdateReviewsforInvalidASIN,
+  updateOneASIN,
+  bulkUpdateASINs
+};
