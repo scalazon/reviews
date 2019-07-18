@@ -1,6 +1,9 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   devServer: {
@@ -64,7 +67,18 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|gif|jpeg|ttf)$/,
+        test: /\.(png|svg|jpg|gif|jpeg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
           {
             loader: 'file-loader',
@@ -82,7 +96,13 @@ module.exports = {
       template: __dirname + '/client/index.html', // create index.html with js script
       inject: 'body',
       filename: 'index.html'
-    })
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name]-[hash].css',
+      chunkFilename: '[id][hash].css'
+    }),
+    new UglifyJsPlugin({ sourceMap: true })
+    // new BundleAnalyzerPlugin()
   ],
   mode: 'production'
 };
