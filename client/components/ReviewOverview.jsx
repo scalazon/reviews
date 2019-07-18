@@ -1,23 +1,52 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar.jsx';
 import '../styles/scss/ReviewOverview.scss';
+import ReviewBreakdown from './ReviewBreakdown.jsx';
+class ReviewOverview extends React.Component {
+  componentDidMount() {}
 
-function ReviewOverview(props) {
-  return (
-    <div className="row">
-      <h5 className="col-12">{90} customer reviews</h5>
-      <div className="col-12">
+  render() {
+    const { summary, summaryIsLoading, summaryNotFound } = this.props;
+    if (summaryIsLoading) {
+      return (
         <div className="row">
-          <div className="col-2 overview-text">5 star</div>
-          <div className="col-8">
-            <ProgressBar percentage={25} />
+          <div className="col">
+            <h5>Summary Loading...</h5>
           </div>
-          <div className="col-2 overview-text">25%</div>
+        </div>
+      );
+    }
+    if (summaryNotFound) {
+      return (
+        <div className="row">
+          <div className="col">
+            <h5>Summary Not Found...</h5>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="row">
+        <h5 className="col-12">{summary.reviewCount} customer reviews</h5>
+        <div className="col-12">
+          <ReviewBreakdown summary={summary} />
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default ReviewOverview;
+const mapStateToProps = state => {
+  return {
+    summary: state.summary,
+    summaryIsLoading: state.summaryIsLoading,
+    summaryNotFound: state.summaryNotFound
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(ReviewOverview);

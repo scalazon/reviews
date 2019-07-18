@@ -26,7 +26,7 @@ function StarRating(props) {
 }
 
 StarRating.propTypes = {
-  overall: PropTypes.string.isRequired
+  overall: PropTypes.number.isRequired
 };
 
 export default StarRating;

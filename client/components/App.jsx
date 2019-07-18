@@ -2,14 +2,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reviewsGetData } from '../actions/reviews';
+import { summaryGetData } from '../actions/summary';
 import '../styles/scss/App.scss';
 import ReviewList from './ReviewList.jsx';
 import ReviewOverview from './ReviewOverview.jsx';
 
 class App extends React.Component {
   componentDidMount() {
-    const { getReviews } = this.props;
+    const { getReviews, getSummary } = this.props;
 
+    getSummary(`B077L6KSGM`);
     getReviews(`B077L6KSGM`);
   }
 
@@ -83,7 +85,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return { getReviews: asin => dispatch(reviewsGetData(asin)) };
+  return {
+    getReviews: asin => dispatch(reviewsGetData(asin)),
+    getSummary: asin => dispatch(summaryGetData(asin))
+  };
 };
 
 export default connect(

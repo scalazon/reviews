@@ -6,9 +6,14 @@ import {
   reviews
 } from './reviews';
 
+import { summaryIsLoading, summaryNotFound, summary } from './summary';
+
 export default combineReducers({
   reviewsHasError,
   reviewsIsLoading,
   reviewsNotFound,
-  reviews
+  reviews,
+  summaryIsLoading,
+  summaryNotFound,
+  summary
 });
