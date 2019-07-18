@@ -51,7 +51,7 @@ class App extends React.Component {
       return (
         <div>
           <hr />
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-sm-3">
                 <ReviewOverview />

@@ -10,8 +10,11 @@ function ProgressBar(props) {
   };
 
   return (
-    <div className="progress">
-      <div className="progress-bar progress-bar-bg" style={barProgress} />
+    <div className="progress progress-bar-shadow">
+      <div
+        className="progress-bar progress-bar-bg rounded"
+        style={barProgress}
+      />
     </div>
   );
 }
