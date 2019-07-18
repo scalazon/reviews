@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { reviewsGetData } from '../actions/reviews';
 import '../styles/scss/App.scss';
 import ReviewList from './ReviewList.jsx';
+import ReviewOverview from './ReviewOverview.jsx';
 
 class App extends React.Component {
   componentDidMount() {
@@ -46,14 +47,15 @@ class App extends React.Component {
       );
     }
 
-    // TODO: Refactor the conditional to be correct for a review list
     if (reviews.length > 0) {
       return (
         <div>
           <hr />
           <div className="container">
             <div className="row">
-              <div className="col-sm-3">ReviewSummary</div>
+              <div className="col-sm-3">
+                <ReviewOverview />
+              </div>
               <div className="col-sm-9">
                 <ReviewList />
               </div>
