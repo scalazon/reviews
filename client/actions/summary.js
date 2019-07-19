@@ -39,6 +39,8 @@ function summaryGetData(asin) {
 
         if (!response.data) {
           dispatch(summaryNotFound(true));
+        } else {
+          dispatch(summaryNotFound(false));
         }
       })
       .catch(err => {
