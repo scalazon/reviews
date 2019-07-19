@@ -18,7 +18,7 @@ function ReviewBreakdown(props) {
         <div className="col-8">
           <ProgressBar percentage={percentage} key={summary._id + index} />
         </div>
-        <div className="col-2 breakdown-text">{percentage}%</div>
+        <div className="col-2 breakdown-text">{Math.round(percentage)}%</div>
       </div>
     );
   });
