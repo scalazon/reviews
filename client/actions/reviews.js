@@ -45,6 +45,8 @@ function reviewsGetData(asin) {
 
         if (response.data.length === 0) {
           dispatch(reviewsNotFound(true));
+        } else {
+          dispatch(reviewsNotFound(false));
         }
       })
       .catch(err => {

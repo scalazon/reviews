@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+// bars are never reordered after rendering
 import React from 'react';
 import ProgressBar from './ProgressBar.jsx';
 import PropTypes from 'prop-types';
@@ -14,7 +16,7 @@ function ReviewBreakdown(props) {
       <div className="row mb-1">
         <div className="col-2 breakdown-text text-nowrap">{index + 1} star</div>
         <div className="col-8">
-          <ProgressBar percentage={percentage} />
+          <ProgressBar percentage={percentage} key={summary._id + index} />
         </div>
         <div className="col-2 breakdown-text">{percentage}%</div>
       </div>
@@ -28,7 +30,8 @@ function ReviewBreakdown(props) {
 ReviewBreakdown.propTypes = {
   summary: PropTypes.shape({
     reviewBreakdown: PropTypes.array.isRequired,
-    reviewCount: PropTypes.number.isRequired
+    reviewCount: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired
   }).isRequired
 };
 

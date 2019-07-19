@@ -11,8 +11,16 @@ class App extends React.Component {
   componentDidMount() {
     const { getReviews, getSummary } = this.props;
 
-    getSummary(`B077L6KSGM`);
-    getReviews(`B077L6KSGM`);
+    // Has to be 'product-change' for other components to broadcast
+    const bc = new BroadcastChannel('product-change');
+    bc.onmessage = ev => {
+      getSummary(ev.data);
+      getReviews(ev.data);
+    };
+
+    // Default item for demo purposes
+    getSummary(`B01D1NMLJU`);
+    getReviews(`B01D1NMLJU`);
   }
 
   render() {
@@ -27,6 +35,7 @@ class App extends React.Component {
       return (
         <div className="container">
           <div className="row h2">Reviews</div>
+          <div className="row h4">No reviews for this product...</div>
         </div>
       );
     }
