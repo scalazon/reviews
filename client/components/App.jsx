@@ -55,9 +55,10 @@ class App extends React.Component {
           <hr />
           <div className="container-fluid">
             <div className="row">
-              <div className="col-sm-3">
+              <div className="col-sm-3 mb-4">
                 <ReviewOverview />
               </div>
+              <hr />
               <div className="col-sm-9">
                 <ReviewList />
               </div>

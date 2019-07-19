@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ProgressBar from './ProgressBar.jsx';
 import '../styles/scss/ReviewOverview.scss';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
+import StarRating from './StarRating.jsx';
 class ReviewOverview extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    // Will be used if/when caching of review summaries is implemented
+  }
 
   render() {
     const { summary, summaryIsLoading, summaryNotFound } = this.props;
@@ -30,6 +32,11 @@ class ReviewOverview extends React.Component {
     return (
       <div className="row">
         <h5 className="col-12">{summary.reviewCount} customer reviews</h5>
+        <div className="col-12">
+          <h6>
+            <StarRating overall={summary.overall} /> {summary.overall}
+          </h6>
+        </div>
         <div className="col-12">
           <ReviewBreakdown summary={summary} />
         </div>
