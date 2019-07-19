@@ -2,18 +2,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reviewsGetData } from '../actions/reviews';
+import { summaryGetData } from '../actions/summary';
 import '../styles/scss/App.scss';
 import ReviewList from './ReviewList.jsx';
+import ReviewOverview from './ReviewOverview.jsx';
 
 class App extends React.Component {
   componentDidMount() {
-    const { getReviews } = this.props;
+    const { getReviews, getSummary } = this.props;
 
     // Has to be 'product-change' for other components to broadcast
     const bc = new BroadcastChannel('product-change');
-    bc.onmessage = ev => getReviews(ev.data);
+    bc.onmessage = ev => {
+      getSummary(ev.data);
+      getReviews(ev.data);
+    };
 
-    // getReviews(`B077L6KSGM`);
+    // Default item for demo purposes
+    getSummary(`B077L6KSGM`);
+    getReviews(`B077L6KSGM`);
   }
 
   render() {
@@ -51,14 +58,16 @@ class App extends React.Component {
       );
     }
 
-    // TODO: Refactor the conditional to be correct for a review list
     if (reviews.length > 0) {
       return (
         <div>
           <hr />
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
-              <div className="col-sm-3">ReviewSummary</div>
+              <div className="col-sm-3 mb-4">
+                <ReviewOverview />
+              </div>
+              <hr />
               <div className="col-sm-9">
                 <ReviewList />
               </div>
@@ -86,7 +95,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return { getReviews: asin => dispatch(reviewsGetData(asin)) };
+  return {
+    getReviews: asin => dispatch(reviewsGetData(asin)),
+    getSummary: asin => dispatch(summaryGetData(asin))
+  };
 };
 
 export default connect(
