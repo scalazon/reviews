@@ -9,7 +9,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9000,
+    port: 8889,
     historyApiFallback: true, // navigation
     proxy: [
       {
@@ -100,8 +100,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name]-[hash].css',
       chunkFilename: '[id][hash].css'
-    }),
-    new UglifyJsPlugin({ sourceMap: true })
+    })
+    // new UglifyJsPlugin({ sourceMap: true })
     // new BundleAnalyzerPlugin()
   ],
   mode: 'production'

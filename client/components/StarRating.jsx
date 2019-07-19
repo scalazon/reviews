@@ -15,10 +15,10 @@ function StarRating(props) {
         initialRating={overall}
         readonly
         emptySymbol={
-          <FontAwesomeIcon icon={farFaStar} className="amazon-color-scheme" />
+          <FontAwesomeIcon icon={farFaStar} className="star-color-scheme" />
         }
         fullSymbol={
-          <FontAwesomeIcon icon={fasFaStar} className="amazon-color-scheme" />
+          <FontAwesomeIcon icon={fasFaStar} className="star-color-scheme" />
         }
       />
     </>
@@ -26,7 +26,7 @@ function StarRating(props) {
 }
 
 StarRating.propTypes = {
-  overall: PropTypes.string.isRequired
+  overall: PropTypes.number.isRequired
 };
 
 export default StarRating;
