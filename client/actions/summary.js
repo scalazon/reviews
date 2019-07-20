@@ -29,11 +29,6 @@ function summaryGetData(asin) {
         `http://reviews-dev.us-west-2.elasticbeanstalk.com/summaries/${asin}`
       )
       .then(response => {
-        console.log(
-          'Recieved the following data from GET to /summaries:',
-          response.data
-        );
-
         dispatch(summary(response.data));
         dispatch(summaryIsLoading(false));
 

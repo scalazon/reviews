@@ -35,11 +35,6 @@ function reviewsGetData(asin) {
     axios
       .get(`http://reviews-dev.us-west-2.elasticbeanstalk.com/reviews/${asin}`)
       .then(response => {
-        console.log(
-          'Recieved the following data from GET to /reviews:',
-          response.data
-        );
-
         dispatch(reviews(response.data));
         dispatch(reviewsIsLoading(false));
 
