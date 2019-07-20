@@ -34,7 +34,8 @@ class ReviewOverview extends React.Component {
         <h5 className="col-12">{summary.reviewCount} customer reviews</h5>
         <div className="col-12">
           <h6>
-            <StarRating overall={summary.overall} /> {summary.overall}
+            <StarRating overall={summary.overall} />
+            {summary.overall.toFixed(1)}
           </h6>
         </div>
         <div className="col-12">
