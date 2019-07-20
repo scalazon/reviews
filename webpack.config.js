@@ -3,7 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = {
   devServer: {
@@ -100,8 +102,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name]-[hash].css',
       chunkFilename: '[id][hash].css'
-    })
-    // new UglifyJsPlugin({ sourceMap: true })
+    }),
+    new UglifyJsPlugin({ sourceMap: true }),
+    new MomentLocalesPlugin()
     // new BundleAnalyzerPlugin()
   ],
   mode: 'production'
