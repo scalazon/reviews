@@ -59,6 +59,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
+    "faker": "^4.1.0",
     "file-loader": "^4.0.0",
     "html-loader": "^0.5.5",
     "mini-css-extract-plugin": "^0.8.0",
