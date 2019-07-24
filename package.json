@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r dotenv/config ./tests --recursive",
+    "test": "jest",
     "watch": "webpack --watch",
     "dev-server": "nodemon -r dotenv/config server/server.js",
     "dev-client": "webpack-dev-server --mode=development --open --color ",
@@ -62,6 +62,7 @@
     "faker": "^4.1.0",
     "file-loader": "^4.0.0",
     "html-loader": "^0.5.5",
+    "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.8.0",
     "mocha": "^6.1.4",
     "node-sass": "^4.12.0",
