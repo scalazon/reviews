@@ -1,5 +1,5 @@
-# famazon-reviews
+# Scalazon - System Design Capstone Project
 
-Mock of Amazon Reviews section as a micro service.
+### Scaling a legacy codebase built with React/Node/Mongo to go from ~100 database records to 10M 
 
-Currently using MERN Stack and Redux, testing with Mocha, Chai and Supertest, deploying with Docker.
+[![Build Status](https://travis-ci.org/scalazon/reviews.svg?branch=first_steps)](https://travis-ci.org/scalazon/reviews)
