@@ -22,7 +22,7 @@ app.use('/reviews', morgan('tiny'));
 
 app.get('/reviews/:asin(\\w+)', cors(), (req, res) => {
   const { asin } = req.params;
-
+  // res.send(asin)
   if (asin) {
     getReviews(asin)
       .then(result => {
@@ -41,6 +41,7 @@ app.get('/reviews', (req, res) => {
 });
 
 app.get('/summaries/updateAll', (req, res) => {
+  // res.send('update summaries accessed')
   updateSummaries()
     .then(result => {
       res.send(result);
@@ -53,7 +54,7 @@ app.get('/summaries/updateAll', (req, res) => {
 
 app.get('/summaries/:asin(\\w+)', cors(), (req, res) => {
   const { asin } = req.params;
-
+  // res.send(asin)
   if (asin) {
     getSummary(asin)
       .then(result => {
@@ -68,6 +69,7 @@ app.get('/summaries/:asin(\\w+)', cors(), (req, res) => {
 });
 
 app.get('/summaries', (req, res) => {
+  // res.send('summaries accessed')
   getSummaries()
     .then(result => {
       res.send(result);

@@ -33,7 +33,8 @@ function reviewsGetData(asin) {
   return dispatch => {
     dispatch(reviewsIsLoading(true));
     axios
-      .get(`http://reviews-dev.us-west-2.elasticbeanstalk.com/reviews/${asin}`)
+      // .get(`http://reviews-dev.us-west-2.elasticbeanstalk.com/reviews/${asin}`)
+      .get(`reviews/${asin}`)
       .then(response => {
         console.log(
           'Recieved the following data from GET to /reviews:',
