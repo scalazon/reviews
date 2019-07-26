@@ -1,4 +1,9 @@
-const axios = require('axios');
+const request = require('supertest');
+const app = require('../server/app.js');
+const path = require('path')
+const db = require(path.resolve(__dirname, '../database/mongodb.js'));
+
+beforeAll( )
 
 test ('adds 1 + 2 to equal 3', () => {
   expect(1+2).toEqual(3);
@@ -7,18 +12,7 @@ test ('adds 1 + 2 to equal 3', () => {
 
 
 
-// Old test code
 
-// const jest = require('jest')
-// const request = require('supertest');
-
-// const { HOST, PORT } = require('../config.js');
-
-// const host = HOST || '127.0.0.1';
-// const port = PORT || 3002;
-
-// console.log('HOST is', HOST);
-// const endpoint = `http://${host}:${port}`;
 
 // describe('Express routes -->', () => {
 //   describe('Root path (/) -->', () => {
