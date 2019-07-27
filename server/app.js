@@ -2,12 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-const { getReviews } = require('../database/reviews');
-const {
-  updateSummaries,
-  getSummaries,
-  getSummary
-} = require('../database/summaries');
+const reviews = require('./sampleReviews');
+const summary = require('./sampleSummary')
+const summaries = require('./sampleSummaries')
+// const { getReviews } = require('../database/reviews');
+// const {
+//   updateSummaries,
+//   getSummaries,
+//   getSummary
+// } = require('../database/summaries');
 
 const app = express();
 
@@ -22,18 +25,18 @@ app.use('/reviews', morgan('tiny'));
 
 app.get('/reviews/:asin(\\w+)', cors(), (req, res) => {
   const { asin } = req.params;
-
-  if (asin) {
-    getReviews(asin)
-      .then(result => {
-        res.send(result);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  } else {
-    res.send();
-  }
+  res.send(reviews)
+  // if (asin) {
+  //   getReviews(asin)
+  //     .then(result => {
+  //       res.send(result);
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // } else {
+  //   res.send();
+  // }
 });
 
 app.get('/reviews', (req, res) => {
@@ -53,29 +56,30 @@ app.get('/summaries/updateAll', (req, res) => {
 
 app.get('/summaries/:asin(\\w+)', cors(), (req, res) => {
   const { asin } = req.params;
-
-  if (asin) {
-    getSummary(asin)
-      .then(result => {
-        res.send(result);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  } else {
-    res.send();
-  }
+  res.send(summary)
+  // if (asin) {
+  //   getSummary(asin)
+  //     .then(result => {
+  //       res.send(result);
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //     });
+  // } else {
+  //   res.send();
+  // }
 });
 
 app.get('/summaries', (req, res) => {
-  getSummaries()
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      console.error(err);
-      res.send();
-    });
+  res.send(summaries)
+  // getSummaries()
+  //   .then(result => {
+  //     res.send(result);
+  //   })
+  //   .catch(err => {
+  //     console.error(err);
+  //     res.send();
+  //   });
 });
 
 /* ASIN ROUTES */

@@ -1,10 +1,27 @@
 const { MongoClient } = require('mongodb');
-const { MONGO_USER, MONGO_PASS } = require('../config');
 
-const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@reviews-zpe0q.mongodb.net/test?retryWrites=true&w=majority`;
 const options = {
   useNewUrlParser: true
 };
+
+const uri = 'mongodb://localhost:27017/'
+
+// MongoClient.connect(uri, options, function(err, db) {
+//   if (err) throw err;
+//   var database = db.db("Reviews");
+//   database.collection("reviews").insert({'name':'garrettwelson'}, function(err, res) {
+//     if (err) throw err;
+//     console.log("inserted")
+//     db.close()
+//   })
+//   // database.createCollection("reviews", function(err, res) {
+//   //   if (err) throw err;
+//   //   console.log("Collection created!");
+//   //   db.close();
+//   // });
+// });
+
+
 
 const databases = {};
 
@@ -22,6 +39,7 @@ async function initializeDatabases() {
 }
 
 function getReviewsDatabase() {
+  console.log('Returning reviews connection object', databases.reviews)
   return databases.reviews;
 }
 

@@ -26,7 +26,8 @@ function summaryGetData(asin) {
     dispatch(summaryIsLoading(true));
     axios
       .get(
-        `http://reviews-dev.us-west-2.elasticbeanstalk.com/summaries/${asin}`
+        // `http://reviews-dev.us-west-2.elasticbeanstalk.com/summaries/${asin}`
+        `summaries/${asin}`
       )
       .then(response => {
         console.log(

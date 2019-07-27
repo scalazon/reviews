@@ -6,9 +6,9 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r dotenv/config ./tests --recursive",
+    "test": "jest",
     "watch": "webpack --watch",
-    "dev-server": "nodemon -r dotenv/config server/server.js",
+    "dev-server": "nodemon server/server.js",
     "dev-client": "webpack-dev-server --mode=development --open --color ",
     "docker-local": "docker run --env-file='.env' -p 3002:3002 bleafman/famazon-reviews",
     "build": "webpack",
@@ -41,9 +41,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
-    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@shelf/jest-mongodb": "^1.1.0",
     "babel-eslint": "^10.0.2",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
@@ -59,12 +61,16 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
+    "faker": "^4.1.0",
     "file-loader": "^4.0.0",
     "html-loader": "^0.5.5",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.8.0",
     "mocha": "^6.1.4",
     "node-sass": "^4.12.0",
     "prettier": "1.18.2",
+    "react-test-renderer": "^16.8.6",
     "sass-loader": "^7.1.0",
     "sinon": "^7.3.2",
     "style-loader": "^0.23.1",
@@ -89,5 +95,11 @@
         "@babel/react"
       ]
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss|less)$": "identity-obj-proxy"
+    }
   }
 }
