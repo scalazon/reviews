@@ -1,17 +1,49 @@
 const request = require('supertest');
 const app = require('../server/app.js');
-const path = require('path')
-const db = require(path.resolve(__dirname, '../database/mongodb.js'));
 
-beforeAll( )
-
-test ('adds 1 + 2 to equal 3', () => {
-  expect(1+2).toEqual(3);
+test ('reviews path sends back an empty response', async done => {
+   request(app)
+    .get('/reviews')
+    .expect(200, done)
 })
 
+test ('reviews path to specific ASIN sends back an array of review objects', async done => {
+  request(app)
+    .get('/reviews/B01D1NMLJU')
+    .expect(200)
+    .then(response => {
+      expect(Array.isArray(response.body)).toBe(true)
+      expect(response.body[1]).toHaveProperty('asin')
+      expect(response.body[2]).toHaveProperty('unixReviewTime')
+      done()
+    })
+})
 
+test ('summaries path sends back an array of summary objects', async done => {
+  request(app)
+    .get('/summaries')
+    .expect(200)
+    .then(response => {
+      expect(Array.isArray(response.body)).toBe(true)
+      expect(response.body.length).toBeGreaterThan(95)
+      done()
+    })
+})
 
-
+test ('individual summary path return one object', async done => {
+  request(app)
+    .get('/summaries/B00GN92MM6')
+    .expect(200)
+    .then(response => {
+      expect(typeof response).toBe('object')
+      expect(response.body).toMatchObject({
+        asin: expect.any(String),
+        overall: expect.any(Number),
+        reviewBreakdown: expect.any(Array)
+      })
+      done()
+    })
+})
 
 
 // describe('Express routes -->', () => {

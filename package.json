@@ -8,7 +8,7 @@
   "scripts": {
     "test": "jest",
     "watch": "webpack --watch",
-    "dev-server": "nodemon -r dotenv/config server/server.js",
+    "dev-server": "nodemon server/server.js",
     "dev-client": "webpack-dev-server --mode=development --open --color ",
     "docker-local": "docker run --env-file='.env' -p 3002:3002 bleafman/famazon-reviews",
     "build": "webpack",
@@ -43,6 +43,7 @@
     "@babel/core": "^7.5.4",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@shelf/jest-mongodb": "^1.1.0",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
