@@ -4,6 +4,9 @@ package-lock.json
 .prettierrc.json
 .eslintrc.json
 data
+.DS_Store
+db_seeding/reviewData.csv
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
