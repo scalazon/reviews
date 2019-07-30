@@ -37,21 +37,20 @@ const fs = require('fs');
 // });
 
 //const data = [];
-writer.pipe(fs.createWriteStream('./db_seeding/reviewData.csv',{flags: 'a'}));
+writer.pipe(fs.createWriteStream('./db_seeding/reviewData2.csv',{flags: 'a'}));
 
-for (let i = 9000001; i < 10000000; i++) {
+for (let i = 0; i <   ; i++) {
   reviewCount = faker.random.number(5)
   for (let j = 0; j < reviewCount; j++) {
     writer.write({
       asin: i,
       reviewerID: faker.random.alphaNumeric(8),
       reviewerName: faker.name.findName(),
-      helpful: `['${faker.random.number(99)}','${faker.random.number(10)}']`,
+      helpful: faker.helpers.replaceSymbolWithNumber('##,##'),
       text: `My ${faker.commerce.productName()} was ${faker.commerce.productAdjective()} and made of ${faker.commerce.productMaterial()}`,
       overall: faker.random.number(5),
       summary: faker.random.words(4),
       UNIX: faker.random.number({max:1564418741}),
-      time: faker.helpers.replaceSymbolWithNumber('## ##, ####')
     })
   }
 }
