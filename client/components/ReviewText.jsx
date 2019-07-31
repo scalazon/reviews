@@ -11,7 +11,7 @@ function ReviewText(props) {
 }
 
 ReviewText.propTypes = {
-  reviewText: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired
 };
 
 export default ReviewText;

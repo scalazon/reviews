@@ -31,7 +31,7 @@ function Review(props) {
       </div>
       <div className="row">
         <div className="col">
-          <ReviewText reviewText={review.reviewText} />
+          <ReviewText reviewText={review.text} />
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@ Review.propTypes = {
   review: PropTypes.shape({
     summary: PropTypes.string.isRequired,
     reviewerName: PropTypes.string.isRequired,
-    reviewText: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
     unixReviewTime: PropTypes.number.isRequired,
     overall: PropTypes.number.isRequired
   }).isRequired

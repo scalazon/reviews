@@ -104,5 +104,5 @@ module.exports = {
     // new UglifyJsPlugin({ sourceMap: true })
     // new BundleAnalyzerPlugin()
   ],
-  mode: 'production'
+  mode: 'development'
 };

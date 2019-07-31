@@ -49,8 +49,25 @@ app.get('/summaries/:asin(\\w+)', cors(), (req, res) => {
       dbfunctions.findProduct(db, asin, function(result) {
         group = result[0].reviewGroup
         dbfunctions.findReviews(db, group, function(result) {
-          res.send(result)
-          client.close()
+          let count = 0
+          let total = 0;
+          let summary = {
+            _id: asin,
+            asin: asin,
+            overall: 0,
+            reviewBreakdown: [0,0,0,0,0],
+            reviewCount: count
+          }
+          result.forEach(function(review) {
+            count ++;
+            total += review.overall;
+            summary.reviewBreakdown[review.overall - 1] += 1
+          })
+          summary.overall = Number((total/count).toFixed(1)),
+          console.log(summary.reviewBreakdown);
+          console.log(summary.overall)
+          res.send(summary);
+          client.close();
         })
       })
     });
