@@ -1,4 +1,4 @@
-const app = require('./app.js');
+const app = require('./mongoApp.js');
 // const { initializeDatabases } = require('../database/mongodb.js');
 
 const { PORT, HOST } = require('../config.js');
@@ -10,9 +10,3 @@ app.listen(port, host, () => {
   console.log(`Running on http://${host}:${port}`);
 });
 
-
-// initializeDatabases().then(() => {
-//   app.listen(port, host, () => {
-//     console.log(`Running on http://${host}:${port}`);
-//   });
-// });

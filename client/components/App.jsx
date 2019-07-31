@@ -19,8 +19,8 @@ class App extends React.Component {
     };
 
     // Default item for demo purposes
-    getSummary(`B01D1NMLJU`);
-    getReviews(`B01D1NMLJU`);
+    getSummary('100');
+    getReviews('100');
   }
 
   render() {

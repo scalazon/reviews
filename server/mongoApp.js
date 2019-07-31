@@ -2,15 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-const reviews = require('./sampleReviews');
-const summary = require('./sampleSummary')
-const summaries = require('./sampleSummaries')
-// const { getReviews } = require('../database/reviews');
-// const {
-//   updateSummaries,
-//   getSummaries,
-//   getSummary
-// } = require('../database/summaries');
+const dbfunctions = require('../database/mongoDB')
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 
 const app = express();
 
@@ -25,107 +19,48 @@ app.use('/reviews', morgan('tiny'));
 
 app.get('/reviews/:asin(\\w+)', cors(), (req, res) => {
   const { asin } = req.params;
-  res.send(reviews)
-  // if (asin) {
-  //   getReviews(asin)
-  //     .then(result => {
-  //       res.send(result);
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // } else {
-  //   res.send();
-  // }
-});
-
-app.get('/reviews', (req, res) => {
-  res.send();
-});
-
-app.get('/summaries/updateAll', (req, res) => {
-  updateSummaries()
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      console.error(err);
-      res.send();
+  const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true });
+  if (asin) {
+    client.connect(function(err) {
+      assert.equal(null, err);
+      const db = client.db('sdc');
+      dbfunctions.findProduct(db, asin, function(result) {
+        group = result[0].reviewGroup
+        dbfunctions.findReviews(db, group, function(result) {
+          res.send(result)
+          client.close()
+        })
+      })
     });
+  } else {
+    client.close
+    res.send();
+  }
 });
+
 
 app.get('/summaries/:asin(\\w+)', cors(), (req, res) => {
   const { asin } = req.params;
-  res.send(summary)
-  // if (asin) {
-  //   getSummary(asin)
-  //     .then(result => {
-  //       res.send(result);
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //     });
-  // } else {
-  //   res.send();
-  // }
+  const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true });
+  if (asin) {
+    client.connect(function(err) {
+      assert.equal(null, err);
+      const db = client.db('sdc');
+      dbfunctions.findProduct(db, asin, function(result) {
+        group = result[0].reviewGroup
+        dbfunctions.findReviews(db, group, function(result) {
+          res.send(result)
+          client.close()
+        })
+      })
+    });
+  } else {
+    client.close
+    res.send();
+  }
+  
 });
 
-app.get('/summaries', (req, res) => {
-  res.send(summaries)
-  // getSummaries()
-  //   .then(result => {
-  //     res.send(result);
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //     res.send();
-  //   });
-});
 
-/* ASIN ROUTES */
-
-// app.get('/asins', (req, res) => {
-//   currentASINs()
-//     .then(result => {
-//       res.send(result);
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       res.send();
-//     });
-// });
-
-// app.get('/asins/updateAll', (req, res) => {
-//   bulkUpdateASINs()
-//     .then(result => {
-//       res.send(result);
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       res.send();
-//     });
-// });
-
-// app.get('/asins/updateOne', (req, res) => {
-//   findAndUpdateReviewsforInvalidASIN()
-//     .then(result => {
-//       res.send(result);
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       res.send();
-//     });
-// });
-
-// app.get('/asins/oneInvalid', (req, res) => {
-//   findReviewsforInvalidASIN()
-//     .then(result => {
-//       res.send(result);
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       res.send();
-//     });
-// });
 
 module.exports = app;
