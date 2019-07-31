@@ -1,4 +1,4 @@
-const { getReviewsDatabase } = require('./mongodb.js');
+const { getReviewsDatabase } = require('../mongodb.js');
 
 const collectionName = 'Reviews';
 
