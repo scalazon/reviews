@@ -56,7 +56,7 @@ app.get('/summaries/:asin(\\w+)', cors(), (req, res) => {
             asin: asin,
             overall: 0,
             reviewBreakdown: [0,0,0,0,0],
-            reviewCount: count
+            reviewCount: 0
           }
           result.forEach(function(review) {
             count ++;
@@ -64,6 +64,7 @@ app.get('/summaries/:asin(\\w+)', cors(), (req, res) => {
             summary.reviewBreakdown[review.overall - 1] += 1
           })
           summary.overall = Number((total/count).toFixed(1)),
+          summary.reviewCount = count
           console.log(summary.reviewBreakdown);
           console.log(summary.overall)
           res.send(summary);

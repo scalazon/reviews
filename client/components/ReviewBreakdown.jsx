@@ -8,12 +8,12 @@ import '../styles/scss/ReviewBreakdown.scss';
 function ReviewBreakdown(props) {
   const { summary } = props;
   const { reviewBreakdown, reviewCount } = summary;
-
   const progressBars = reviewBreakdown.map((count, index) => {
-    const percentage = (count / reviewCount) * 100;
+    const percentage = Math.floor((count / reviewCount) * 100);
+    
 
     return (
-      <div className="row mb-1">
+      <div className="row mb-1" key={`prog_${index}`}>
         <div className="col-2 breakdown-text text-nowrap">{index + 1} star</div>
         <div className="col-8">
           <ProgressBar percentage={percentage} key={summary._id + index} />

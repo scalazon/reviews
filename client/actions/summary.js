@@ -30,10 +30,7 @@ function summaryGetData(asin) {
         `summaries/${asin}`
       )
       .then(response => {
-        console.log(
-          'Recieved the following data from GET to /summaries:',
-          response.data
-        );
+       
 
         dispatch(summary(response.data));
         dispatch(summaryIsLoading(false));

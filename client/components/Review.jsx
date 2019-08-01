@@ -18,7 +18,7 @@ function Review(props) {
       </div>
       <div className="row">
         <div className="col">
-          <ReviewDate unixReviewTime={review.unixReviewTime} />
+          <ReviewDate unixReviewTime={review.UNIX} />
         </div>
       </div>
       <div className="row">
